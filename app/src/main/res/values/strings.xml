@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FootballFixture</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_tabbed">Tabbed</string>
+    <string name="last_week">GEÇEN HAFTA</string>
+    <string name="this_week">BU HAFTA</string>
+    <string name="next_week">GELECEK HAFTA</string>
+
+</resources>
