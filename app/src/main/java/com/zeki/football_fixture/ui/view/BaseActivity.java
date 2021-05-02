@@ -6,10 +6,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.widget.TextView;
 
 import com.zeki.football_fixture.R;
 import com.zeki.football_fixture.ui.Adapter.SectionsPagerAdapter;
@@ -32,6 +34,11 @@ public class BaseActivity extends AppCompatActivity {
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = findViewById(R.id.fab);
+
+        TextView textTeamA = (TextView) findViewById(R.id.textTeamA);
+        TextView textTeamB = (TextView) findViewById(R.id.textTeamB);
+        TextView textDate = (TextView) findViewById(R.id.matchDate);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.fixtureList);
 
 
         fab.setOnClickListener(new View.OnClickListener() {

@@ -3,6 +3,8 @@ package com.zeki.football_fixture.ui.view;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +14,10 @@ import android.widget.TextView;
 import com.zeki.football_fixture.R;
 import com.zeki.football_fixture.network.Interface.TeamInterface;
 import com.zeki.football_fixture.network.model.Team;
+import com.zeki.football_fixture.ui.Adapter.CustomListAdapter;
 import com.zeki.football_fixture.ui.viewModel.WeekCalculator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -38,19 +42,15 @@ public class NextWeekFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    RecyclerView recyclerView;
+    CustomListAdapter adapter;
+    List<Team> teamLists = new ArrayList<>();
+
     public NextWeekFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment3.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static NextWeekFragment newInstance(String param1, String param2) {
         NextWeekFragment fragment = new NextWeekFragment();
         Bundle args = new Bundle();
@@ -75,7 +75,10 @@ public class NextWeekFragment extends Fragment {
         // Inflate the layout for this fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.activity_main, container, false);
-        TextView textView = (TextView) view.findViewById(R.id.textView);
+        TextView textTeamA = (TextView) view.findViewById(R.id.textTeamA);
+        TextView textTeamB = (TextView) view.findViewById(R.id.textTeamB);
+        TextView textDate = (TextView) view.findViewById(R.id.matchDate);
+        recyclerView = (RecyclerView) view.findViewById(R.id.fixtureList);
 
         //Getting next week of this month as an arraylist
         WeekCalculator t = new WeekCalculator();
@@ -104,24 +107,26 @@ public class NextWeekFragment extends Fragment {
                         for (int i =0; i<nextWeek.length ; i++ ) {
 
                             if (nextWeek[i].equals(team.getTime())) {
-                                content += ("ID: " + team.getId() + "\n");
-                                content += ("TEAM A:  " + team.getTeamA() + "\n");
-                                content += ("TEAM B:  " + team.getTeamB() + "\n");
-                                content += ("TIME:  " + team.getTime() + "\n");
-                                textView.append(content);
+                                Team t = new Team();
+
+                                t.setId(team.getId());
+                                t.setTeamA(team.getTeamA());
+                                t.setTeamB(team.getTeamB());
+                                t.setTime(team.getTime());
+                                teamLists.add(t);
 
                             }
                         }
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        adapter = new CustomListAdapter(getActivity(), teamLists);
+                        recyclerView.setAdapter(adapter);
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<List<Team>> call, Throwable t) {
-
-
-                textView.setText(t.getMessage());
-
+                
             }
         });
 

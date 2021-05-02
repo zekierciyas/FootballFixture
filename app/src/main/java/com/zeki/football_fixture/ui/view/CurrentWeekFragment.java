@@ -3,6 +3,8 @@ package com.zeki.football_fixture.ui.view;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +14,10 @@ import android.widget.TextView;
 import com.zeki.football_fixture.R;
 import com.zeki.football_fixture.network.Interface.TeamInterface;
 import com.zeki.football_fixture.network.model.Team;
+import com.zeki.football_fixture.ui.Adapter.CustomListAdapter;
 import com.zeki.football_fixture.ui.viewModel.WeekCalculator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,6 +41,12 @@ public class CurrentWeekFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    RecyclerView recyclerView;
+    CustomListAdapter adapter;
+    List<Team> teamLists = new ArrayList<>();
+
+
 
     public CurrentWeekFragment() {
         // Required empty public constructor
@@ -73,9 +83,14 @@ public class CurrentWeekFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.activity_main, container, false);
 
-        TextView textView = (TextView) view.findViewById(R.id.textView);
+        View view = inflater.inflate(R.layout.activity_main, container, false);
+        TextView textTeamA = (TextView) view.findViewById(R.id.textTeamA);
+        TextView textTeamB = (TextView) view.findViewById(R.id.textTeamB);
+        TextView textDate = (TextView) view.findViewById(R.id.matchDate);
+        recyclerView = (RecyclerView) view.findViewById(R.id.fixtureList);
+
+
 
         //Getting current week data of this month as an arrayList
         WeekCalculator t = new WeekCalculator();
@@ -104,23 +119,25 @@ public class CurrentWeekFragment extends Fragment {
                         for (int i =0; i<currentWeek.length ; i++ ) {
 
                             if (currentWeek[i].equals(team.getTime())) {
-                                content += ("ID: " + team.getId() + "\n");
-                                content += ("TEAM A:  " + team.getTeamA() + "\n");
-                                content += ("TEAM B:  " + team.getTeamB() + "\n");
-                                content += ("TIME:  " + team.getTime() + "\n");
-                                textView.append(content);
+                                Team t = new Team();
+
+                                t.setId(team.getId());
+                                t.setTeamA(team.getTeamA());
+                                t.setTeamB(team.getTeamB());
+                                t.setTime(team.getTime());
+                                teamLists.add(t);
 
                             }
                         }
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        adapter = new CustomListAdapter(getActivity(), teamLists);
+                        recyclerView.setAdapter(adapter);
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<List<Team>> call, Throwable t) {
-
-
-                textView.setText(t.getMessage());
 
             }
         });
