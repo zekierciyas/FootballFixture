@@ -1,4 +1,4 @@
-package com.zeki.football_fixture.ui.Adapter;
+package com.zeki.football_fixture.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -20,9 +20,10 @@ public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.Vi
     List<Team> teams;
 
     public CustomListAdapter(Context ctx, List<Team> teams) {
-        this.inflater = LayoutInflater.from(ctx);
-        this.teams = teams;
-
+        if (ctx!=null) {
+            this.inflater = LayoutInflater.from(ctx);
+            this.teams = teams;
+        }
     }
 
     @NonNull
@@ -56,7 +57,6 @@ public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.Vi
             textTeamA  = (TextView) itemView.findViewById(R.id.textTeamA);
             textTeamB = (TextView) itemView.findViewById(R.id.textTeamB);
             textDate = (TextView) itemView.findViewById(R.id.matchDate);
-           RecyclerView recyclerView = (RecyclerView) itemView.findViewById(R.id.fixtureList);
         }
     }
 }

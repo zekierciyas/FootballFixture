@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <attr name="prımaryTextColor" format="color" />
+    <attr name="colorGreen" format="color" />
+    <attr name="colorWhite" format="color" />
+    <attr name="colorBlack" format="color" />
+    <attr name="colorBackground" format="color" />
+
+</resources>

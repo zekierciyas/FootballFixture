@@ -1,5 +1,6 @@
 package com.zeki.football_fixture.ui.view;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.zeki.football_fixture.R;
-import com.zeki.football_fixture.ui.viewModel.PageViewModel;
+import com.zeki.football_fixture.ui.view_model.PageViewModel;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -53,7 +54,7 @@ public class PlaceholderFragment extends Fragment {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
-            }
+             }
         });
         return root;
     }

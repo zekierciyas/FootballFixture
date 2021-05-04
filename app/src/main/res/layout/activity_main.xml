@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/BaseTheme"
     android:orientation="horizontal"
     android:padding="8dp"
         >
@@ -29,6 +30,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="-129dp" />
+        tools:layout_editor_absoluteX="-129dp"
+        android:background="?attr/colorBackground"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

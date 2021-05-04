@@ -1,4 +1,4 @@
-package com.zeki.football_fixture.ui.viewModel;
+package com.zeki.football_fixture.ui.view_model;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;

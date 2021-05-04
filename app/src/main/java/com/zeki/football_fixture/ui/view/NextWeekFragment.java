@@ -10,13 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.zeki.football_fixture.R;
 import com.zeki.football_fixture.network.Interface.TeamInterface;
 import com.zeki.football_fixture.network.model.Team;
-import com.zeki.football_fixture.ui.Adapter.CustomListAdapter;
-import com.zeki.football_fixture.ui.viewModel.WeekCalculator;
+import com.zeki.football_fixture.ui.adapter.CustomListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

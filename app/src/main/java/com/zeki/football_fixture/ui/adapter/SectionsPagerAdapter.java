@@ -1,27 +1,24 @@
-package com.zeki.football_fixture.ui.Adapter;
+package com.zeki.football_fixture.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.database.Observable;
+import android.graphics.Color;
 import android.os.Parcelable;
-import android.view.ViewGroup;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 
 import com.zeki.football_fixture.R;
-import com.zeki.football_fixture.ui.view.BaseActivity;
 import com.zeki.football_fixture.ui.view.CurrentWeekFragment;
 import com.zeki.football_fixture.ui.view.LastWeekFragment;
 import com.zeki.football_fixture.ui.view.NextWeekFragment;
-import com.zeki.football_fixture.ui.viewModel.PageViewModel;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -29,19 +26,11 @@ import com.zeki.football_fixture.ui.viewModel.PageViewModel;
  */
 public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
+
+
     @StringRes
     public static final int[] TAB_TITLES = new int[]{R.string.last_week, R.string.this_week, R.string.next_week};
-    public static String selectedTitle;
-    private final Context mContext;
-    private PageViewModel pageViewModel;
-    public final Observable<String> firstName = new Observable<String>() {
-        @Override
-        public void registerObserver(String observer) {
-            super.registerObserver(observer);
-        }
-    };
-
-
+     private final Context mContext;
 
 
 
@@ -70,12 +59,12 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
          return fragment;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
         String title = mContext.getResources().getString(TAB_TITLES[position]);
-        SectionsPagerAdapter.selectedTitle.set(title);
-         return title;
+        return title;
     }
 
     @Override
