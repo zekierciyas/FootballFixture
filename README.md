@@ -2,7 +2,7 @@
 
 ## Description of app
 ```
-The application mainly draws and lists the fake data I have created on "mockapi" with the help of retrofit the matches in three time zones. In the first version, nestedScrollView is used. Then I passed it to the recyclerView in support of children parents. The architecture used in the project is MVVM architecture.
+This repository currently includes the sample application of usage retrofit to get data from a fake api to pass it to recycler view.
 ```
 
 
