@@ -1,16 +1,21 @@
 package com.zeki.football_fixture.ui.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.view.Window;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.zeki.football_fixture.R;
@@ -29,16 +34,13 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        TextView textTeamA = (TextView) findViewById(R.id.textTeamA);
-        TextView textTeamB = (TextView) findViewById(R.id.textTeamB);
-        TextView textDate = (TextView) findViewById(R.id.matchDate);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.fixtureList);
 
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -48,5 +50,10 @@ public class BaseActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        super.startActivityForResult(intent, requestCode);
     }
 }

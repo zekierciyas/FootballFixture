@@ -10,8 +10,8 @@ public class WeekCalculator {
     private Calendar calendar;
     public String[] getCurrentWeek() {
         this.calendar = Calendar.getInstance();
-        this.calendar.setFirstDayOfWeek(Calendar.SUNDAY);
-        this.calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        this.calendar.setFirstDayOfWeek(Calendar.MONDAY);
+        this.calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         return getNextWeek();
     }
     public String[] getNextWeek() {

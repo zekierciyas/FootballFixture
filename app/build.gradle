@@ -54,6 +54,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //lottie animation
+    def lottieVersion = "3.6.1"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
 }
 repositories {
     mavenCentral()

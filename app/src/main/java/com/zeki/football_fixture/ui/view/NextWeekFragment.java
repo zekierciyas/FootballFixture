@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,15 +34,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class NextWeekFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     RecyclerView recyclerView;
     CustomListAdapter adapter;
     List<Team> teamLists = new ArrayList<>();
@@ -54,35 +46,35 @@ public class NextWeekFragment extends Fragment {
     public static NextWeekFragment newInstance(String param1, String param2) {
         NextWeekFragment fragment = new NextWeekFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        teamLists.clear();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.activity_main, container, false);
-        TextView textTeamA = (TextView) view.findViewById(R.id.textTeamA);
-        TextView textTeamB = (TextView) view.findViewById(R.id.textTeamB);
-        TextView textDate = (TextView) view.findViewById(R.id.matchDate);
+         View view = inflater.inflate(R.layout.activity_main, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.fixtureList);
 
+
         //Getting next week of this month as an arraylist
-        WeekCalculator t = new WeekCalculator();
-        String[] nextWeek = BaseActivity.nextWeek;
+         String[] nextWeek = BaseActivity.nextWeek;
+
+         //Cleaning the previous data for not be doubled.
+         teamLists.clear();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(TeamInterface.BASE_URL)
@@ -107,14 +99,13 @@ public class NextWeekFragment extends Fragment {
                         for (int i =0; i<nextWeek.length ; i++ ) {
 
                             if (nextWeek[i].equals(team.getTime())) {
-                                Team t = new Team();
 
+                                Team t = new Team();
                                 t.setId(team.getId());
                                 t.setTeamA(team.getTeamA());
                                 t.setTeamB(team.getTeamB());
                                 t.setTime(team.getTime());
                                 teamLists.add(t);
-
                             }
                         }
                         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -126,7 +117,7 @@ public class NextWeekFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Team>> call, Throwable t) {
-                
+                Log.d("TAG", "onFailure: API call error");
             }
         });
 
